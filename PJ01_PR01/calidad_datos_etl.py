@@ -16,7 +16,6 @@ landing_path = var['landing_path']
 creds = get_json_file(cred_path)
 
 datasource_sql_files = glob.glob(var['datasource_path'] + '\*.sql')
-curated_sql_files = glob.glob(var['curated_path'] + '\*.sql')
 curated_rule_sql_files = glob.glob(var['curated_path'] + '\\rules\*.sql')
 kpi_sql_files = glob.glob(var['kpi_path'] + '\*.sql')
 
