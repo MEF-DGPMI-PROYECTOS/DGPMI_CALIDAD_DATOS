@@ -14,7 +14,7 @@ creds = get_json_file(cred_path)
 
 profiling_report_path = var['profiling_report_path']
 
-datasource_sql_files = glob.glob(var['datasource_sql_path'] + '\*.sql')
+datasource_sql_files = glob.glob(var['datasource_path'] + '\*.sql')
 #%%TODO Lectura de llave
 key_file_path = var['key_path'] + '\\'+ 'filekey.key'
 key = get_file_key(key_file_path)
