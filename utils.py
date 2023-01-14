@@ -121,7 +121,7 @@ def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, landing_path
             df_i.to_parquet(path_i_export, engine='pyarrow', compression='snappy')
             print('....')
             df_i.to_sql(name=name.lower(), schema='landing', con=conn_dl, if_exists='replace', index=False)
-            print('Dataframe exported to the landing layer')
+            print('\nDataframe exported to the landing layer')
             del df_i
             print('Finish time: ', datetime.now())
             print('Duration: ', datetime.now() - now)
