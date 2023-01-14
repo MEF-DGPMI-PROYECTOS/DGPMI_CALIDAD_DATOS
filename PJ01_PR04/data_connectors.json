@@ -1,0 +1,45 @@
+{"data_connectors": {
+        "landing_tables": {
+            "class_name": "ConfiguredAssetSqlDataConnector",
+            "assets":{
+                "table_lnd_tr_proy_ano":{
+                    "table_name": "tr_proy_ano",
+                    "schema_name": "landing"
+                },
+                "table_lnd_inv_detalle_cierre_expost":{
+                    "table_name": "inv_detalle_cierre_expost",
+                    "schema_name": "landing"
+                },
+                "table_lnd_tr_proy_ano_mes_delta":{
+                    "table_name": "tr_proy_ano_mes_delta",
+                    "schema_name": "landing"
+                }
+            }
+        },
+        "curated_tables": {
+            "class_name": "ConfiguredAssetSqlDataConnector",
+            "assets":{
+                "table_cur_tr_proy_ano":{
+                    "table_name": "tr_proy_ano",
+                    "schema_name": "curated"
+                },
+                "table_cur_inv_detalle_cierre_expost":{
+                    "table_name": "inv_detalle_cierre_expost",
+                    "schema_name": "curated"
+                },
+                "table_cur_prg_cartera_inversion":{
+                    "table_name": "prg_cartera_inversion",
+                    "schema_name": "curated"
+                },
+                "table_cur_inv_proyecto":{
+                    "table_name": "inv_proyecto",
+                    "schema_name": "curated"
+                },
+                "table_cur_tr_proy_ano_mes_delta":{
+                    "table_name": "tr_proy_ano_mes_delta",
+                    "schema_name": "curated"
+                }
+            }
+        }
+    }
+}
