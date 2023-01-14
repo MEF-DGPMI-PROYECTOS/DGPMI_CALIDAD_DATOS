@@ -91,6 +91,8 @@ def get_file_key(key_file_path):
     return key
 
 def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, landing_path, conn_dl):
+    now_i = datetime.now()
+    print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(datasource_sql_files):
         try:
             name = (i.split('\\')[-1]).split('.')[0]
@@ -127,9 +129,12 @@ def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, landing_path
             print('Duration: ', datetime.now() - now)
         except Exception as e:
             print(e.args)
-
+    print('2. Finish time global: ', datetime.now())
+    print('Duration: ', datetime.now() - now_i)
 
 def to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_ds, conn_dl):
+    now_i = datetime.now()
+    print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(curated_rule_sql_files):
         try:
             name = (i.split('\\')[-1]).split('.')[0]
@@ -167,8 +172,12 @@ def to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_ds, conn
             print('Duration: ', datetime.now() - now)
         except Exception as e:
             print(e.args)
+    print('2. Finish time global: ', datetime.now())
+    print('Duration: ', datetime.now() - now_i)
 
 def to_functional_layer(kpi_sql_files, conn_dl):
+    now_i = datetime.now()
+    print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(kpi_sql_files):
         try:
             name = (i.split('\\')[-1]).split('.')[0]
@@ -191,14 +200,18 @@ def to_functional_layer(kpi_sql_files, conn_dl):
             print('Memory usage (MB): ', np.round(df_i.memory_usage().sum() / 10**6, 3))
 
             df_i.to_sql(name=name.lower(), schema='functional', con=conn_dl, if_exists='replace', index=False)
-            print('Dataframe exported to the functional layer')
+            print('\nDataframe exported to the functional layer')
             del df_i
             print('Finish time: ', datetime.now())
             print('Duration: ', datetime.now() - now)
         except Exception as e:
             print(e.args)
+    print('2. Finish time global: ', datetime.now())
+    print('Duration: ', datetime.now() - now_i)
 
 def to_profiling_report(datasource_sql_files, profiling_report_path, conn_ds):
+    now_i = datetime.now()
+    print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(datasource_sql_files):
         try:
             name = (i.split('\\')[-1]).split('.')[0]
@@ -223,3 +236,5 @@ def to_profiling_report(datasource_sql_files, profiling_report_path, conn_ds):
             print('Duration: ', datetime.now() - now)
         except Exception as e:
             print(e.args)
+    print('2. Finish time global: ', datetime.now())
+    print('Duration: ', datetime.now() - now_i)
