@@ -17,7 +17,7 @@ row_number() over(
 from curated.xls_proyecto_banco xpb inner join curated.prg_cartera_inversion cart
 on xpb.codigo_unico = cart.codigo_unico inner join (select id_version,fecha_corte_fin from ult_version where row_num = 1)  ver
 on ver.id_version = cart.version   inner  join curated.inv_proyecto ip
-on ip.cod_unico = xpb.codigo_unico  
+on ip.codigo_unico = xpb.codigo_unico  
 where cart.estado_reg = 1 and UPPER(xpb.estado) in ('CERRADO','ACTIVO') and xpb.esconder =0 and COALESCE(ip.val_beneficiario_ultimo,0) >0
 )
 

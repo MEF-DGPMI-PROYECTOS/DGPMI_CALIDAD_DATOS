@@ -1,12 +1,12 @@
-SELECT ANO_EJE, CODIGO_UNICO, ESTADO_REG, FECHA_VALIDACION_BRECHA, TO_DATE(FECHA_VIABILIDAD,'DD/MM/RRRR') FECHA_VIABILIDAD, ID_BRECHA, ID_IDEA, NOMBRE_INVERSION, PIM, PROGRAMACION_INVERSION_ANIO0, PROGRAMACION_INVERSION_ANIO1, PROGRAMACION_INVERSION_ANIO2, PROGRAMACION_INVERSION_ANIO3, TIPO_NO_PREVISTA, VALIDACION_BRECHA, VERSION,
+select ano_eje, codigo_unico, estado_reg, fecha_validacion_brecha, to_date(fecha_viabilidad,'dd/mm/rrrr') fecha_viabilidad, id_brecha, id_idea, nombre_inversion, pim, programacion_inversion_anio0, programacion_inversion_anio1, programacion_inversion_anio2, programacion_inversion_anio3, tipo_no_prevista, validacion_brecha, version,
 to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga
-FROM PRG_CARTERA_INVERSION
-WHERE (ANO_EJE IS NULL OR ANO_EJE >=2005)
-AND CODIGO_UNICO IS NOT NULL
-AND ESTADO_REG IS NOT NULL
-AND ESTADO_REG IN (0,1)
-AND (PIM >=0 OR PIM IS NULL)
-AND (PROGRAMACION_INVERSION_ANIO0>=0 OR PROGRAMACION_INVERSION_ANIO0 IS NULL)
-AND (TIPO_NO_PREVISTA>=0 OR TIPO_NO_PREVISTA IS NULL)
-AND VALIDACION_BRECHA IS NOT NULL
-AND (VERSION IS NOT NULL AND VERSION>0)
+from prg_cartera_inversion
+where (ano_eje is null or ano_eje >=2005)
+and codigo_unico is not null
+and estado_reg is not null
+and estado_reg in (0,1)
+and (pim >=0 or pim is null)
+and (programacion_inversion_anio0>=0 or programacion_inversion_anio0 is null)
+and (tipo_no_prevista>=0 or tipo_no_prevista is null)
+and validacion_brecha is not null
+and (version is not null and version>0)

@@ -1,7 +1,7 @@
-SELECT COD_UNICO CODIGO_UNICO, TO_DATE(FEC_VIABIL,'DD/MM/RRRR') FEC_VIABIL, ID_CARTERA_INVERSION, ID_ESTADO, VAL_BENEFICIARIO_ULTIMO,
+select cod_unico codigo_unico, to_date(fec_viabil,'dd/mm/rrrr') fec_viabil, id_cartera_inversion, id_estado, val_beneficiario_ultimo,
 to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga
-FROM INV_PROYECTO
-WHERE COD_UNICO IS NOT NULL
-AND (ID_CARTERA_INVERSION >= 0 OR ID_CARTERA_INVERSION IS NULL)
-AND ID_ESTADO IS NOT NULL
-AND (VAL_BENEFICIARIO_ULTIMO >= 0 OR VAL_BENEFICIARIO_ULTIMO IS NULL)
+from inv_proyecto
+where cod_unico is not null
+and (id_cartera_inversion >= 0 or id_cartera_inversion is null)
+and id_estado is not null
+and (val_beneficiario_ultimo >= 0 or val_beneficiario_ultimo is null)

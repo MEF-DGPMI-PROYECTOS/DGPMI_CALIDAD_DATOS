@@ -1,7 +1,7 @@
-SELECT ACT_PROY, ANO_EJE, MONTO_DEVENGADO, MONTO_PIM, TIPO_ACT_PROY, to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga
-FROM TR_PROY_ANO
-WHERE ACT_PROY IS NOT NULL
-AND (ANO_EJE IS NOT NULL AND ANO_EJE>=2004)
-AND (MONTO_DEVENGADO IS NOT NULL AND MONTO_DEVENGADO>=0)
-AND (MONTO_PIM IS NOT NULL AND MONTO_PIM>=0)
-AND TIPO_ACT_PROY IS NOT NULL
+select act_proy, ano_eje, monto_devengado, monto_pim, tipo_act_proy, to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga
+from tr_proy_ano
+where act_proy is not null
+and (ano_eje is not null and ano_eje>=2004)
+and (monto_devengado is not null and monto_devengado>=0)
+and (monto_pim is not null and monto_pim>=0)
+and tipo_act_proy is not null
