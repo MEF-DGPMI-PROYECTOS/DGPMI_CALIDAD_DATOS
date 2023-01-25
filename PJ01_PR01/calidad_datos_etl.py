@@ -6,7 +6,7 @@ from DataComp.utils import get_json_file, get_file_key
 from DataComp.utils import to_landing_layer, to_curated_layer, to_functional_layer
 
 #%% TODO Lectura de variables y credenciales
-var_path = r'C:\Users\jjuua\PycharmProjects\Proyecto_CalidadDatos_ETL\variables.json'
+var_path = r'C:\PROYECTOS\MEF\SCRIPT\DGPMI_CALIDAD_DATOS\variables.json'
 
 var = get_json_file(var_path)
 

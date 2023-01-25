@@ -5,7 +5,7 @@ import json
 from getpass import getpass
 #%% TODO Lectura de variables y credenciales
 
-var_path = r'C:\Users\jjuua\PycharmProjects\Proyecto_CalidadDatos\variables.json'
+var_path = r'C:\PROYECTOS\MEF\SCRIPT\DGPMI_CALIDAD_DATOS\variables.json'
 
 with open(var_path) as json_file:
     var = json.load(json_file)
@@ -22,7 +22,7 @@ with open(key_file_path, 'rb') as filekey:
 
 #%% TODO función para crear la cadena de conexion
 def get_engine(e):
-    options = {1: 'oracle', 2: 'postgres', 3: 'mysql', 4:'mssql'}
+    options = {1: 'oracle', 2: 'postgresql', 3: 'mysql', 4:'mssql'}
     if e in options:
         return options[e]
     else:
