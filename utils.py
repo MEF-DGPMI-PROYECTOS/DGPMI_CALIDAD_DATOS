@@ -89,7 +89,7 @@ def get_file_key(key_file_path):
         key = filekey.read()
     return key
 
-def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl):
+def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl, delta):
     now_i = datetime.now()
     print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(datasource_sql_files):
@@ -104,7 +104,7 @@ def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl):
                 df_load = df_datasources[df_datasources['data_source'] == name.lower()]
                 if list(df_load['process_type'])[0] == 'incremental':
                     filter = list(df_load['filter'])[0]
-                    sql_i = sql_i + ' where ' + filter + ' = ' + str(var['date_delta_monthly'])
+                    sql_i = sql_i + ' where ' + filter + ' = ' + str(delta)
                     name = name + '_delta'
             df_i = get_data_sql(conn_ds, sql_i)
             df_i.columns =  df_i.columns.str.lower()

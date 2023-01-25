@@ -18,6 +18,7 @@ creds = get_json_file(cred_path)
 datasource_sql_files = glob.glob(var['datasource_path'] + '\*.sql')
 curated_rule_sql_files = glob.glob(var['curated_path'] + '\\rules\*.sql')
 kpi_sql_files = glob.glob(var['kpi_path'] + '\*.sql')
+delta = var['date_delta_monthly']
 
 #%%TODO Lectura de llave
 key_file_path = var['key_path'] + '\\'+ 'filekey.key'
@@ -29,18 +30,18 @@ level = 'dev'
 
 cred_ds_name = 'engine_sch_' + schema_ds + '_' + level
 cred_dl_name = 'engine_sch_' + schema_dl + '_' + level
-cred_dl_psycopg_name = 'engine_sch_psycopg' + '_' + level
+#cred_dl_psycopg_name = 'engine_sch_psycopg' + '_' + level
 
 fernet = Fernet(key)
 conn_ds = fernet.decrypt(bytes(creds[cred_ds_name], 'utf-8')).decode('utf-8')
 conn_dl = fernet.decrypt(bytes(creds[cred_dl_name], 'utf-8')).decode('utf-8')
-conn_dl_psycopg = fernet.decrypt(bytes(creds[cred_dl_psycopg_name], 'utf-8')).decode('utf-8')
+#conn_dl_psycopg = fernet.decrypt(bytes(creds[cred_dl_psycopg_name], 'utf-8')).decode('utf-8')
 
 #%% TODO LANDING LAYER
 datasources_df_path = var['datasource_path'] + '\datasources.csv'
 df_datasources = pd.read_csv(datasources_df_path)
 #%%
-to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl)
+to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl, delta)
 #%% TODO CURATED LAYER
 correct_datatypes_file = var['curated_path'] + '\\' + 'corect_data_types.csv'
 df_correct_datatypes = pd.read_csv(correct_datatypes_file)
