@@ -63,7 +63,6 @@ class SendNotification:
         server.sendmail(FROM, to, message_text)
         server.quit()
 
-#%%
 #%% TODO Functions
 def get_json_file(var_path):
     with open(var_path) as json_file:
@@ -90,7 +89,7 @@ def get_file_key(key_file_path):
         key = filekey.read()
     return key
 
-def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, landing_path, conn_dl):
+def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl):
     now_i = datetime.now()
     print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(datasource_sql_files):
@@ -110,17 +109,17 @@ def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, landing_path
             df_i = get_data_sql(conn_ds, sql_i)
             df_i.columns =  df_i.columns.str.lower()
             print("\nShape: ", df_i.shape)
-            print('Before optimization:\n', df_i.dtypes)
+            #print('Before optimization:\n', df_i.dtypes)
             fcols = df_i.select_dtypes('float').columns
             icols = df_i.select_dtypes('integer').columns
-            print('Float columns: ', fcols)
-            print('Int columns: ', icols)
+            #print('Float columns: ', fcols)
+            #print('Int columns: ', icols)
             df_i[fcols] = df_i[fcols].apply(pd.to_numeric, downcast='float')
             df_i[icols] = df_i[icols].apply(pd.to_numeric, downcast='integer')
-            print('After optimization:\n', df_i.dtypes)
+            #print('After optimization:\n', df_i.dtypes)
             print('Memory usage (MB): ', np.round(df_i.memory_usage().sum() / 10**6, 3))
-            path_i_export = landing_path + '\\' + name + '.parquet'
-            df_i.to_parquet(path_i_export, engine='pyarrow', compression='snappy')
+            #path_i_export = landing_path + '\\' + name + '.parquet'
+            #df_i.to_parquet(path_i_export, engine='pyarrow', compression='snappy')
             print('....')
             df_i.to_sql(name=name.lower(), schema='landing', con=conn_dl, if_exists='replace', index=False)
             print('\nDataframe exported to the landing layer')
@@ -132,7 +131,7 @@ def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, landing_path
     print('2. Finish time global: ', datetime.now())
     print('Duration: ', datetime.now() - now_i)
 
-def to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_ds, conn_dl):
+def to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_dl):
     now_i = datetime.now()
     print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(curated_rule_sql_files):
@@ -145,7 +144,7 @@ def to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_ds, conn
             print("Reading data: ", name)
             print('Start time: ', now)
             sql_i = read_sql_file(i)
-            df_trans = get_data_sql(conn_ds, sql_i)
+            df_trans = get_data_sql(conn_dl, sql_i)
             df_trans.columns = df_trans.columns.str.lower()
             fcols = df_trans.select_dtypes('float').columns
             icols = df_trans.select_dtypes('integer').columns
