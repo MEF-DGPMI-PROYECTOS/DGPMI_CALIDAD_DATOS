@@ -6,7 +6,7 @@ from DataComp.utils import get_json_file, get_file_key
 from DataComp.utils import to_landing_layer, to_curated_layer, to_functional_layer
 
 #%% TODO Lectura de variables y credenciales
-var_path = r'C:\PROYECTOS\MEF\SCRIPT\DGPMI_CALIDAD_DATOS\variables.json'
+var_path = r'C:\Users\jjuua\PycharmProjects\Proyecto_CalidadDatos_ETL\variables.json'
 
 var = get_json_file(var_path)
 
@@ -39,13 +39,13 @@ conn_dl_psycopg = fernet.decrypt(bytes(creds[cred_dl_psycopg_name], 'utf-8')).de
 #%% TODO LANDING LAYER
 datasources_df_path = var['datasource_path'] + '\datasources.csv'
 df_datasources = pd.read_csv(datasources_df_path)
-
-to_landing_layer(datasource_sql_files, df_datasources, conn_ds, landing_path, conn_dl)
+#%%
+to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl)
 #%% TODO CURATED LAYER
 correct_datatypes_file = var['curated_path'] + '\\' + 'corect_data_types.csv'
 df_correct_datatypes = pd.read_csv(correct_datatypes_file)
 #%%
-to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_ds, conn_dl)
+to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_dl)
 
 #%% TODO FUNCTIONAL LAYER
 to_functional_layer(kpi_sql_files, conn_dl)
