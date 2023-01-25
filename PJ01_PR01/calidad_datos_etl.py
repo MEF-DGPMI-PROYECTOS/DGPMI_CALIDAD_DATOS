@@ -11,7 +11,7 @@ var_path = r'C:\PROYECTOS\MEF\SCRIPT\DGPMI_CALIDAD_DATOS\variables.json'
 var = get_json_file(var_path)
 
 cred_path = var['credential_path'] + '\credenciales.json'
-landing_path = var['landing_path']
+#landing_path = var['landing_path']
 
 creds = get_json_file(cred_path)
 
