@@ -1,9 +1,12 @@
 {
 	"datasource_path" : "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS\\PJ01_PR01\\LANDING",
+	"landing_profile_path" : "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS\\PJ01_PR01\\LANDING\\profile",
+	"curated_profile_path" : "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS\\PJ01_PR01\\CURATED\\profile",
 	"kpi_path" : "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS\\PJ01_PR01\\FUNCTIONAL",
 	"curated_path" : "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS\\PJ01_PR01\\CURATED",
 	"key_path" : "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS",
-	"profiling_report_path" : "C:\\PROYECTOS\\MEF\\REPORT\\DGPMI_CALIDAD_DATOS\\PJ01_PR02\\LANDING",
+	"profiling_report_path_landing" : "C:\\PROYECTOS\\MEF\\REPORT\\DGPMI_CALIDAD_DATOS\\PJ01_PR02\\LANDING",
+	"profiling_report_path_curated" : "C:\\PROYECTOS\\MEF\\REPORT\\DGPMI_CALIDAD_DATOS\\PJ01_PR02\\CURATED",
 	"credential_path" : "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS",
 	"gx_data_connectors_path": "C:\\PROYECTOS\\MEF\\SCRIPT\\DGPMI_CALIDAD_DATOS\\PJ01_PR04",
 	"chunk_size" : 1e+5,

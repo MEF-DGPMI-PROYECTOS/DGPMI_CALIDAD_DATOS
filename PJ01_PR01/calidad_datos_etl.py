@@ -40,13 +40,14 @@ conn_dl = fernet.decrypt(bytes(creds[cred_dl_name], 'utf-8')).decode('utf-8')
 #%% TODO LANDING LAYER
 datasources_df_path = var['datasource_path'] + '\datasources.csv'
 df_datasources = pd.read_csv(datasources_df_path)
+df_datasources = df_datasources[df_datasources['status'] == 1]
 #%%
 to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl, delta)
 #%% TODO CURATED LAYER
 correct_datatypes_file = var['curated_path'] + '\\' + 'corect_data_types.csv'
 df_correct_datatypes = pd.read_csv(correct_datatypes_file)
 #%%
-to_curated_layer(curated_rule_sql_files, df_correct_datatypes, conn_dl)
+to_curated_layer(curated_rule_sql_files, df_correct_datatypes, df_datasources, conn_dl)
 
 #%% TODO FUNCTIONAL LAYER
 to_functional_layer(kpi_sql_files, conn_dl)
