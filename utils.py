@@ -91,6 +91,7 @@ def get_file_key(key_file_path):
 
 def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl, delta):
     now_i = datetime.now()
+    print('Inicio de la carga a la capa LANDING')
     print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(datasource_sql_files):
         try:
@@ -137,6 +138,7 @@ def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl, del
 
 def to_curated_layer(curated_rule_sql_files, df_correct_datatypes, df_datasources, conn_dl):
     now_i = datetime.now()
+    print('Inicio de la transformación y carga a la capa CURATED')
     print('1. Start time global: ', now_i)
     for i in tqdm.tqdm(curated_rule_sql_files):
         try:
