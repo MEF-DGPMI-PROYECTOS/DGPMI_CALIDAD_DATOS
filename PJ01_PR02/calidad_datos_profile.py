@@ -25,9 +25,8 @@ cred_path = var['credential_path'] + '\credenciales.json'
 
 creds = get_json_file(cred_path)
 
-profiling_report_path = var['profiling_report_path']
+profiling_report_path = var[report_var]
 
-datasource_sql_files = glob.glob(var['datasource_path'] + '\*.sql')
 #%%TODO Lectura de llave
 key_file_path = var['key_path'] + '\\'+ 'filekey.key'
 key = get_file_key(key_file_path)
@@ -50,5 +49,5 @@ cred_dl_psycopg_name = 'engine_sch_psycopg' + '_' + level
 fernet = Fernet(key)
 conn_ds = fernet.decrypt(bytes(creds[cred_ds_name], 'utf-8')).decode('utf-8')
 #%%TODO Profiling report
-to_profiling_report(datasource_sql_files, profiling_report_path, df_datasources, conn_ds)
+to_profiling_report(profiling_report_path, df_datasources, layer, conn_dl)
 #%%

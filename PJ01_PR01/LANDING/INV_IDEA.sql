@@ -1,0 +1,1 @@
+select ANO_EJE, COD_IDEA, DES_NOMBRE, ID_IDEA, FEC_CREA , to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga from INV_IDEA

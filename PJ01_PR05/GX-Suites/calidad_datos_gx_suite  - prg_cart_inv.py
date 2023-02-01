@@ -10,7 +10,7 @@ context = ge.data_context.DataContext()
 
 
 # Feel free to change the name of your suite here. Renaming this will not remove the other one.
-table_name = "tr_proy_ano"
+table_name = "prg_cart_inv"
 expectation_suite_name = "suite_ds_"+table_name
 try:
     suite = context.get_expectation_suite(expectation_suite_name=expectation_suite_name)
@@ -44,32 +44,119 @@ except DataContextError:
 expectation_configuration = ExpectationConfiguration(
    expectation_type="expect_column_values_to_not_be_null",
    kwargs={
-      "column": "act_proy",
+      "column": "codigo_unico"
    },
    meta={
       "notes": {
          "format": "markdown",
-         "content": "El campo ACT_PROY no acepta valores nulos"
+         "content": "El campo CODIGO_UNICO no acepta valores nulos"
       }
    }
 )
 suite.add_expectation(expectation_configuration=expectation_configuration)
 
 
-# In[4]:
+# In[7]:
 expectation_configuration = ExpectationConfiguration(
-   expectation_type="expect_column_values_to_not_be_null",
+   expectation_type="expect_column_values_to_be_between",
    kwargs={
-      "column": "ano_eje",
+      "column": "estado_reg",
+      "max_value": 1,
+      "min_value": 0
    },
    meta={
       "notes": {
          "format": "markdown",
-         "content": "El campo ANO_EJE no acepta valores nulos"
+         "content": "El campo ESTADO_REG acepta los valores {0, 1}"
       }
    }
 )
 suite.add_expectation(expectation_configuration=expectation_configuration)
+# In[8]:
+expectation_configuration = ExpectationConfiguration(
+   expectation_type="expect_column_values_to_be_between",
+   kwargs={
+      "column": "pim",
+      "max_value": 1700000000.0,
+      "min_value": 0
+   },
+   meta={
+      "notes": {
+         "format": "markdown",
+         "content":  "El campo PIM acepta valores positivos"
+      }
+   }
+)
+suite.add_expectation(expectation_configuration=expectation_configuration)
+
+# In[8]:
+expectation_configuration = ExpectationConfiguration(
+   expectation_type="expect_column_values_to_be_between",
+   kwargs={
+      "column": "programacion_inversion_anio0",
+      "max_value": 1200000000.0,
+      "min_value": 0
+   },
+   meta={
+      "notes": {
+         "format": "markdown",
+         "content": "El campo PROGRAMACION_INVERSION_ANIO0 acepta valores positivos"
+      }
+   }
+)
+suite.add_expectation(expectation_configuration=expectation_configuration)
+
+# In[8]:
+expectation_configuration = ExpectationConfiguration(
+   expectation_type="expect_column_values_to_be_between",
+   kwargs={
+      "column": "programacion_inversion_anio1",
+      "max_value": 40e9
+      "min_value": 0
+   },
+   meta={
+      "notes": {
+         "format": "markdown",
+         "content": "El campo PROGRAMACION_INVERSION_ANIO1 acepta valores positivos"
+      }
+   }
+)
+suite.add_expectation(expectation_configuration=expectation_configuration)
+
+# In[8]:
+expectation_configuration = ExpectationConfiguration(
+   expectation_type="expect_column_values_to_be_between",
+   kwargs={
+      "column": "programacion_inversion_anio2",
+      "max_value": 40e9,
+      "min_value": 0
+   },
+   meta={
+      "notes": {
+         "format": "markdown",
+         "content": "El campo PROGRAMACION_INVERSION_ANIO2 acepta valores positivos"
+      }
+   }
+)
+suite.add_expectation(expectation_configuration=expectation_configuration)
+# In[8]:
+expectation_configuration = ExpectationConfiguration(
+   expectation_type="expect_column_values_to_be_between",
+   kwargs={
+      "column": "programacion_inversion_anio3",
+      "max_value": 40e9,
+      "min_value": 0
+   },
+   meta={
+      "notes": {
+         "format": "markdown",
+         "content": "El campo PROGRAMACION_INVERSION_ANIO3 acepta valores positivos"
+      }
+   }
+)
+suite.add_expectation(expectation_configuration=expectation_configuration)
+
+
 # ## Review & Save Your Expectations
 #
 # Let's save the expectation suite as a JSON file in the `great_expectations/expectations` directory of your project.

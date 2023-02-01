@@ -1,0 +1,1 @@
+select MONTO_DEVENGADO, ACT_PROY , to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga from TR_PROY

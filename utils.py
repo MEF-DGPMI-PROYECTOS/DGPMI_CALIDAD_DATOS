@@ -18,6 +18,9 @@ import pandas_profiling
 from sqlalchemy import create_engine
 from sqlalchemy.dialects.mysql import SET
 import warnings
+
+from sqlalchemy.sql.functions import mode
+
 warnings.filterwarnings("ignore")
 #%%
 class SendNotification:
@@ -103,6 +106,7 @@ def to_landing_layer(datasource_sql_files, df_datasources, conn_ds, conn_dl, del
             if name.lower() in list(df_datasources['data_source']):
                 df_load = df_datasources[df_datasources['data_source'] == name.lower()]
                 if list(df_load['process_type'])[0] == 'incremental':
+                    sql_i = read_sql_file(i)
                     filter = list(df_load['filter'])[0]
                     sql_i = sql_i + ' where ' + filter + ' = ' + str(delta)
                     name = name + '_delta'
@@ -219,36 +223,34 @@ def to_functional_layer(kpi_sql_files, conn_dl):
     print('2. Finish time global: ', datetime.now())
     print('Duration: ', datetime.now() - now_i)
 
-def to_profiling_report(datasource_sql_files, profiling_report_path, df_datasources, layer, conn_dl):
+def to_profiling_report(profiling_report_path, df_datasources, layer, conn_dl):
     now_i = datetime.now()
     print('1. Start time global: ', now_i)
-    for i in tqdm.tqdm(datasource_sql_files):
+    for i, row in tqdm.tqdm(df_datasources.iterrows()):
         try:
-            name = (i.split('\\')[-1]).split('.')[0]
+            name = row['data_source']
             now = datetime.now()
             print("\n***************************************************************")
             print("Reading data: ", name)
             print('Start time: ', now)
-            if name.lower() in list(df_datasources['data_source']):
-                sql_i = read_sql_file(i)
-                df_i = get_data_sql(conn_dl, sql_i)
-                print("\nShape: ", df_i.shape)
-                fcols = df_i.select_dtypes('float').columns
-                icols = df_i.select_dtypes('integer').columns
-                df_i[fcols] = df_i[fcols].apply(pd.to_numeric, downcast='float')
-                df_i[icols] = df_i[icols].apply(pd.to_numeric, downcast='integer')
-                print('Memory usage (MB): ', np.round(df_i.memory_usage().sum() / 10 ** 6, 3))
-                path_i_export = profiling_report_path + '\\Profile_' + name + '.html'
-                profile = pandas_profiling.ProfileReport(df_i, title="Profiling Report - " + layer.upper + " - "+ name.upper())
-                profile.to_file(output_file=path_i_export)
-                print('\nProfiling report exported')
-                del df_i
-                print('Finish time: ', datetime.now())
-                print('Duration: ', datetime.now() - now)
-            else:
-                print(name, " is not defined in datasources with status == 1")
-                print('Finish time: ', datetime.now())
-                print('Duration: ', datetime.now() - now)
+            sql_i = "select  * from " + str(layer) + "." + str(row['data_source'])
+            df_i = get_data_sql(conn_dl, sql_i)
+            print("\nShape: ", df_i.shape)
+            fcols = df_i.select_dtypes('float').columns
+            icols = df_i.select_dtypes('integer').columns
+            df_i[fcols] = df_i[fcols].apply(pd.to_numeric, downcast='float')
+            df_i[icols] = df_i[icols].apply(pd.to_numeric, downcast='integer')
+            print('Memory usage (MB): ', np.round(df_i.memory_usage().sum() / 10 ** 6, 3))
+            path_i_export = profiling_report_path + '\\Profile_' + name.upper() + '.html'
+            # Reporte completo
+            # profile = pandas_profiling.ProfileReport(df_i, title="Profiling Report - " + layer.upper() + " - "+ name.upper())
+            # Reporte mínimo
+            profile = pandas_profiling.ProfileReport(df_i, title="Profiling Report - " + layer.upper() + " - " + name.upper(), minimal=True)
+            profile.to_file(output_file=path_i_export)
+            print('\nProfiling report exported')
+            del df_i
+            print('Finish time: ', datetime.now())
+            print('Duration: ', datetime.now() - now)
         except Exception as e:
             print(e.args)
     print('2. Finish time global: ', datetime.now())

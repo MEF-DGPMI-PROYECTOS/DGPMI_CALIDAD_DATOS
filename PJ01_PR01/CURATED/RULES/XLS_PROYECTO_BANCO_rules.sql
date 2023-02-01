@@ -1,8 +1,16 @@
-select pb.codigo_unico,pb.monto,pb.monto_viable,pb.dev_año_actual,pb.pim_año_actual,pb.dev dev_acumulado,
-pb.nivel,pb.pliego_opmi,pb.funcion,pb.programa,pb.subprogram,pb.des_tipo_formato, esconder, 
-pb.estado, pb.situacion,to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga 
-from xls_proyecto_banco pb
-where pb.codigo_unico is not null
-   and (pb.monto is  null or pb.monto>0)
-   and (pb.dev_año_actual is null or pb.dev_año_actual>0)
-   and (pb.pim_año_actual is null or pb.pim_año_actual>0)
+WITH tbl_ini AS (
+SELECT MONTO,ESTADO,pim_ano_actual,cast(codigo_unico as integer) codigo_unico,MONTO_VIABLE,dev_ano_actual,
+SITUACION,ano_viab,FECHA_REGI,FECHA_VIAB,TIPO_FORMATO,cast(ESCONDER as integer) as ESCONDER,DES_CIERRE,
+cast(CERRADO as integer) as CERRADO,MONTO_LAUDO,MONTO_FIANZA,to_char(now(),'dd/mm/yyyy hh24:mi:ss') fecha_carga FROM landing.XLS_PROYECTO_BANCO
+WHERE CODIGO_UNICO IS NOT NULL AND ESTADO IS NOT NULL AND CERRADO IS NOT NULL 
+AND ESCONDER IS NOT NULL  AND SITUACION IS NOT NULL  
+),
+dupli as(
+SELECT CODIGO_UNICO,count(1) AS Dupli FROM tbl_ini
+GROUP BY CODIGO_UNICO)
+SELECT a.MONTO,a.ESTADO,a.pim_ano_actual,a.CODIGO_UNICO,a.MONTO_VIABLE,dev_ano_actual,
+SITUACION,ano_viab,FECHA_REGI,FECHA_VIAB,TIPO_FORMATO,ESCONDER,DES_CIERRE,
+CERRADO,MONTO_LAUDO,MONTO_FIANZA, fecha_carga
+FROM tbl_ini a  INNER JOIN dupli b
+ON a.CODIGO_UNICO = b.CODIGO_UNICO
+WHERE b.Dupli=1 AND CERRADO IN (1,0) AND ESCONDER IN (1,0)

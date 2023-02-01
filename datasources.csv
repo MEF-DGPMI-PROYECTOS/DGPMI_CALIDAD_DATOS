@@ -1,19 +1,18 @@
-data_source, process_type, frequency, filter
-INFORME_CIERRE,,
-INV_ACTIVIDAD_CIERRE,,
-INV_CIERRE_INVERSION,,
-INV_DETALLE_CIERRE_EXPOST,,
-INV_EJECUCION,,
-INV_ETAPA,,
-INV_EXP_TECNICO,,
-INV_EXP_TECNICO_SEG,,
-INV_IDEA,,
-INV_PARAMETROS,,
-INV_PROYECTO,,
-PRG_CARTERA_INVERSION,,
-PRG_CORTE_REGISTRO,,
-TR_PROY,,
-TR_PROY_ANO,SOBREESCRIBIR,SEMANAL
-TR_PROY_ANO_MES,INCREMENTAL,MENSUAL,(ano_eje*100 + mes_eje)
-XLS_INV_EJEC_SEGUIM,,
-XLS_PROYECTO_BANCO,,
+table_name,process_type,frequency,filter,status,table_name_gx
+informe_cierre,,,,0,informe_cierre
+inv_cierre_inversion,,,,0,inv_cierr_inv
+inv_detalle_cierre_expost,,,,0,inv_det_cie_exp
+inv_ejecucion,,,,1,inv_ejecucion
+inv_etapa,,,,0,inv_etapa
+inv_exp_tecnico,,,,0,inv_exp_tecnico
+inv_exp_tecnico_seg,,,,0,inv_exp_tecnico_seg
+inv_idea,,,,1,inv_idea
+inv_parametros,,,,1,inv_parametros
+inv_proyecto,,,,0,inv_proyecto
+prg_cartera_inversion,,,,0,prg_cart_inv
+prg_corte_registro,,,,0,prg_corte_registro
+tr_proy,,,,0,tr_proy
+tr_proy_ano,sobreescribir,semanal,,0,tr_proy_ano
+tr_proy_ano_mes,incremental,mensual,(ano_eje*100 + mes_eje),0,tr_proy_ano_mes
+xls_inv_ejec_seguim,,,,0,xls_inv_ejec_seg
+xls_proyecto_banco,,,,0,xls_proy_banco

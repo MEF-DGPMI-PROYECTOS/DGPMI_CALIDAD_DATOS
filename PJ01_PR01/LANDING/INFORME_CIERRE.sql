@@ -1,0 +1,1 @@
+SELECT PROYECTO , to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga from  INFORME_CIERRE

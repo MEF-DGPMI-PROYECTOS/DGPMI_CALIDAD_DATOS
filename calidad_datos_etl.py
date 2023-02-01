@@ -1,4 +1,6 @@
 #%% TODO librerías
+import time
+
 from cryptography.fernet import Fernet
 import pandas as pd
 import glob
@@ -6,7 +8,7 @@ from DataComp.utils import get_json_file, get_file_key
 from DataComp.utils import to_landing_layer, to_curated_layer, to_functional_layer
 
 #%% TODO Lectura de variables y credenciales
-var_path = r'C:\PROYECTOS\MEF\SCRIPT\DGPMI_CALIDAD_DATOS\variables.json'
+var_path = r'C:\Users\jjuua\PycharmProjects\Proyecto_CalidadDatos_ETL\variables.json'
 
 var = get_json_file(var_path)
 
@@ -48,7 +50,6 @@ correct_datatypes_file = var['curated_path'] + '\\' + 'corect_data_types.csv'
 df_correct_datatypes = pd.read_csv(correct_datatypes_file)
 #%%
 to_curated_layer(curated_rule_sql_files, df_correct_datatypes, df_datasources, conn_dl)
-
 #%% TODO FUNCTIONAL LAYER
 #to_functional_layer(kpi_sql_files, conn_dl)
 #%% TODO SEMANTIC LAYER

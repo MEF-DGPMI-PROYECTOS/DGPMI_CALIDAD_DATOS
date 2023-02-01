@@ -1,0 +1,1 @@
+SELECT ID_ETAPA , to_char(sysdate,'dd/mm/rrrr hh24:mi:ss') fecha_carga from  INV_ETAPA
